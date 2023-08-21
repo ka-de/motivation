@@ -1,0 +1,1 @@
+This site returns a random quote as a JSON object from a curated list of smart things smart people said once.
