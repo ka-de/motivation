@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+</head>
+<body>
+    <script>
+        // Define a function to fetch and return a random quote as JSON
+        async function getRandomQuote() {
+            // Replace 'your-username' and 'your-repo' with your GitHub username and repository name
+            const jsonUrl = 'https://raw.githubusercontent.com/Kadelam/motivation/main/motivation.json';
+
+            try {
+                const response = await fetch(jsonUrl);
+                const data = await response.json();
+
+                // Generate a random index
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const randomQuote = data[randomIndex];
+
+                // Return the random quote as JSON
+                return JSON.stringify(randomQuote);
+            } catch (error) {
+                console.error('Error fetching JSON:', error);
+                return JSON.stringify({ error: 'Failed to fetch JSON' });
+            }
+        }
+
+        // Call the function to fetch and return a random quote
+        getRandomQuote().then((quoteJson) => {
+            console.log(quoteJson);
+            // You can also send the JSON response to a specific endpoint if needed
+        });
+    </script>
+</body>
+</html>
