@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Quote Generator</title>
+    <!-- Include the json-viewer library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.css">
 </head>
 <body>
     <div id="json-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/json-viewer-js/dist/json-viewer.min.js"></script>
     <script>
-        // Define a function to fetch and display a random quote as JSON
+        // Define a function to fetch and display a random quote as formatted JSON
         async function getRandomQuote() {
             const jsonUrl = 'https://raw.githubusercontent.com/Kadelam/motivation/main/motivation.json';
 
@@ -20,9 +23,10 @@
                 const randomIndex = Math.floor(Math.random() * data.length);
                 const randomQuote = data[randomIndex];
 
-                // Display the random quote as JSON
+                // Display the formatted JSON using json-viewer
                 const jsonContainer = document.getElementById('json-container');
-                jsonContainer.textContent = JSON.stringify(randomQuote, null, 2);
+                jsonContainer.innerHTML = ''; // Clear previous content
+                jsonViewer.showJSON(randomQuote, jsonContainer);
             } catch (error) {
                 console.error('Error fetching JSON:', error);
                 const jsonContainer = document.getElementById('json-container');
