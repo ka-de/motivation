@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Quote Generator</title>
-</head>
-<body>
-    <div id="json-container"></div>
-    <script>
-        // Define a function to fetch and display a random quote as JSON
-        async function getRandomQuote() {
-            const jsonUrl = 'https://raw.githubusercontent.com/Kadelam/motivation/main/motivation.json';
+<div id="json-container"></div>
+
+<script>
+    // Function to extract and display JSON data from the HTML content
+    function extractAndDisplayJson() {
+        const jsonContainer = document.getElementById('json-container');
+
+        // Check if the json-container element exists
+        if (jsonContainer) {
+            // Extract the text content from the div
+            const jsonText = jsonContainer.textContent.trim();
 
             try {
-                const response = await fetch(jsonUrl);
-                const data = await response.json();
+                const jsonData = JSON.parse(jsonText);
 
-                // Generate a random index
-                const randomIndex = Math.floor(Math.random() * data.length);
-                const randomQuote = data[randomIndex];
-
-                // Display the random quote as JSON
-                const jsonContainer = document.getElementById('json-container');
-                jsonContainer.textContent = JSON.stringify(randomQuote, null, 2);
+                // Display the JSON data
+                jsonContainer.textContent = JSON.stringify(jsonData, null, 2);
             } catch (error) {
-                console.error('Error fetching JSON:', error);
-                const jsonContainer = document.getElementById('json-container');
-                jsonContainer.textContent = JSON.stringify({ error: 'Failed to fetch JSON' }, null, 2);
+                console.error('Error parsing JSON:', error);
+                jsonContainer.textContent = JSON.stringify({ error: 'Failed to parse JSON' }, null, 2);
             }
+        } else {
+            console.error('json-container not found in HTML.');
         }
+    }
 
-        // Call the function to fetch and display a random quote
-        getRandomQuote();
-    </script>
-</body>
-</html>
+    // Call the function to extract and display JSON data
+    extractAndDisplayJson();
+</script>
