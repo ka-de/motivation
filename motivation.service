@@ -1,0 +1,14 @@
+[Unit]
+Description=Motivation
+Documentation=https://
+
+[Service]
+ExecStart=/usr/bin/node /var/www/motivation/index.js
+WorkingDirectory=/var/www/motivation
+Restart=always
+User=kadelam
+Group=kadelam
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
