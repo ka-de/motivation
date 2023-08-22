@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const cors = require('cors');
 
 const jsonFilePath = '/var/www/motivation/motivation.json';
+
+app.use(cors());
 
 app.get('/motivation', (req, res) => {
     fs.readFile(jsonFilePath, 'utf8', (err, data) => {
